@@ -1,0 +1,46 @@
+<html>
+<body>
+<pre>
+HELLO vm.
+    ## 你看不到我
+value1:$!{value1}
+    $!{value2}
+    ${value3}
+    #foreach($color in $colors)
+    color $!{foreach.index}/$!{foreach.count}: $!{color}
+    #end
+
+    #foreach($kv in $map.entrySet())
+   number $!{foreach.index}/$!{foreach.count}:$!{kv.key}  $!{kv.value}
+    #end
+
+    User:$!{user.name}
+    User:$!{user.getName()}
+
+    #set($title="nowcoder")
+    Include: #include("header.html")        ###纯粹的包含文本
+    Parse:#parse("header.html")             ###可以替换title变量
+
+    #macro(render_color,$color,$index)       ##函数
+    Color By Macro $index,$color
+    #end
+
+     #foreach($color in $colors)           ##调用函数
+   #render_color($color,$foreach.index)
+    #end
+
+    #set($hello="hello")
+    #set($hworld="$!{hello} world")           ##双引号才会对里面进行解析，单引号不会
+    #set($hworld1='$!{hello} world')
+
+
+    hworld:$hworld
+    hworld1:$hworld1
+
+
+    $!{colors.size()}
+
+    ##以上为模板解析讲解
+</pre>
+</body>
+</html>
